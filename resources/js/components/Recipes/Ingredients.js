@@ -51,6 +51,7 @@ const Ingredients = (recipeName) => {
             )
             .catch(err => {console.log(err)});
     };
+    console.log(inputFields[0].recipeSource.length, "DOLZINAAAAaAAAAAAA");
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -100,7 +101,7 @@ const Ingredients = (recipeName) => {
                 </div>
             </form>
             <div className="col-sm-12">
-            <button type="submit" style={{marginRight: '5px'}} className="btn btn-success"
+            <button disabled={inputFields[0].recipeSource.length === 0 && inputFields[0].quantity.length === 0} type="submit" style={{marginRight: '5px'}} className="btn btn-success"
                     onClick={e => onSubmit(e)} >Save Recipe</button>
             <Link type="submit" className="btn btn-warning" to='/list'>List All Recipes</Link>
             </div>

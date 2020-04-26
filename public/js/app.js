@@ -79999,6 +79999,7 @@ var Ingredients = function Ingredients(recipeName) {
     });
   };
 
+  console.log(inputFields[0].recipeSource.length, "DOLZINAAAAaAAAAAAA");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -80048,6 +80049,7 @@ var Ingredients = function Ingredients(recipeName) {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    disabled: inputFields[0].recipeSource.length === 0 && inputFields[0].quantity.length === 0,
     type: "submit",
     style: {
       marginRight: '5px'
@@ -80433,8 +80435,8 @@ var Recipe = function Recipe() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Petar\Desktop\Docker\soursico-test\Recipe\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Petar\Desktop\Docker\soursico-test\Recipe\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Petar\Desktop\Docker\test\sourcico_test\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Petar\Desktop\Docker\test\sourcico_test\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
