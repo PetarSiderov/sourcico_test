@@ -20,7 +20,7 @@ class CreateRecipeTable extends Migration
             $table->string('preparation_time')->nullable();
             $table->string('preparation_instructions');
             $table->string('list_of_ingredients');
-            $table->float('ingredient_quantity');
+            $table->string('ingredient_quantity');
         });
     }
 

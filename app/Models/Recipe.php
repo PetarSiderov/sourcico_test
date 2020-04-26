@@ -28,13 +28,21 @@ class Recipe extends Model
 
     public static function CreateRecipe($validatedData)
     {
+         $recipeSource = '';
+         $quantity = '';
+         $counter =0;
+         foreach($validatedData['ingredients'] as $data){
+             $counter++;
+             $recipeSource .= $data['recipeSource'].', ';
+             $quantity .= $data['quantity'].', ';
+         }
         DB::table('test.recipes')->insert([
             'recipe_name'=> $validatedData['name'],
-            'recipe_source'=> '',
+            'recipe_source'=> $counter,
             'preparation_time' => $validatedData['preparationTime'],
             'preparation_instructions'=> $validatedData['preparationInstructions'],
-            'list_of_ingredients' => json_encode($validatedData['ingredients']),
-            'ingredient_quantity' => 0
+            'list_of_ingredients' => $recipeSource,
+            'ingredient_quantity' => $quantity
         ]);
     }
 }

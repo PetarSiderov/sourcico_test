@@ -41,18 +41,16 @@ const Ingredients = (recipeName) => {
             ingredients: inputFields,
             preparationInstructions: recipeName.instructionsState
         };
-        console.log('FORMATAAAA AUUUUUUUUUUUUUUUUUUUF', form);
 
         axios.post('/api/saveRecipe',{form}).then(response =>
         {
-            console.log(response);
             setRedicert(true);
         }
             )
             .catch(err => {console.log(err)});
     };
-    console.log(inputFields[0].recipeSource.length, "DOLZINAAAAaAAAAAAA");
-    return (
+
+     return (
         <>
             <form onSubmit={handleSubmit}>
                 <div className="form-row">

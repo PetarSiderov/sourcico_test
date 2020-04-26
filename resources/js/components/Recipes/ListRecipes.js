@@ -3,8 +3,9 @@ import React, {useState, Fragment, useEffect} from "react";
 import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
-import {Redirect} from "react-router";
+import BaseTable, { Column } from 'react-base-table'
 import { Table } from "react-fluid-table";
+import BootstrapTable  from 'react-bootstrap-table-next';
 import Modal from 'react-modal';
 const ListRecipes = (url, config) => {
 
@@ -29,7 +30,7 @@ const ListRecipes = (url, config) => {
         e.target.nameRecipe = setNameRecipe(e.target.value);
     };
     const deleteRest = () => {
-      //  console.log(data);
+
         axios.delete(`/api/deleteRecipe/${nameRecipe}`).then(response =>{
                 axios.get('/api/list',).then(response => dataSet(response.data)
                 )
@@ -50,39 +51,94 @@ const ListRecipes = (url, config) => {
             transform             : 'translate(-50%, -50%)'
         }
     };
+    let data4 = [];
+    if(data !== null){
+        data4 = data && (data.map(data => ({
+            id: data.id,
+            recipeName: data.recipe_name,
+            prepTime: data.preparation_time,
+            preparationInstructions: data.preparation_instructions !== undefined ? data.preparation_instructions : '',
+            numberIngredients: data.recipe_source !== null && (data.recipe_source),
+            recipeSource: data.list_of_ingredients !== null && (data.list_of_ingredients),
+            quantity:  data.ingredient_quantity !== null && (data.ingredient_quantity),
+        }))).slice();
+    }
     const columns = [
+        {
+            key: 'id',
+            name: 'Recipe Id',
+            width: 100
+        },
         {
             key: "recipeName",
             name: "Recipe Name",
-            width: 300,
-            height: 100
+            width: 110,
         },
         {
             key: "prepTime",
             name: "Preparation Time",
-            width: 300,
-            height: 100
+            width: 160,
         },
         {
             key: "preparationInstructions",
             name: "Preparation Instructions",
-            height: 100,
-            width: 300
+            width: 200,
+        },
+        {
+            key: "numberIngredients",
+            name: "Number Ingredients",
+            width: 190,
+        },
+        {
+            key: "recipeSource",
+            name: "Number Ingredients",
+            width: 170
+        },
+        {
+            key: "quantity",
+            name: "Number Ingredients",
+            width: 150
         },
     ];
-    let data4 = '';
-    if(data !== null){
-        console.log(data);
-        data4 = data.map(data => ({
-        recipeName: data.recipe_name,
-        prepTime: data.preparation_time,
-        preparationInstructions: data.preparation_instructions
-    }));
-    }
+    const columnsNew = [
+        {
+            dataFiled: "id",
+            text: "Recipe Id"
+        },
+        {
+            dataFiled: "recipeName",
+            text: "Recipe Name",
+        },
+        {
+            dataFiled: "prepTime",
+            text: "Preparation Time",
+        },
+        {
+            dataFiled: "preparationInstructions",
+            text: "Preparation Instructions",
+        },
+        {
+            dataFiled: "numberIngredients",
+            text: "Number Ingredients",
+        },
+        {
+            dataFiled: "recipeSource",
+            text: "Number Ingredients"
+        },
+        {
+            dataFiled: "quantity",
+            text: "Number Ingredients"
+        },
+    ];
+
     return (
         <div className='container' style={{
-            marginTop: '10%'
+            marginTop: '5%'
         }}>
+            {data4.length > 0 && (
+                <BootstrapTable keyField='prepTime' data={[]} columns={columnsNew}/>
+            )
+            }
             <Table
                 data={data4 && data4}
                 columns={columns}

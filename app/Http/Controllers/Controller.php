@@ -29,7 +29,21 @@ class Controller extends BaseController
     }
     public function getAllRecipes(){
         try{
-            return DB::table('test.recipes')->get();
+            $list = DB::table('test.recipes')->get();
+            $new_list= null;
+            foreach($list as $key =>$l){
+                $new_list[$key] =[
+                    'id' => $l->id,
+                    'recipe_name' => $l->recipe_name,
+                    'recipe_source' => $l->recipe_source,
+                    'preparation_time' => $l->preparation_time,
+                    'preparation_instructions' => $l->preparation_instructions !== null ?
+                        $l->preparation_instructions : '',
+                    'list_of_ingredients' => $l->list_of_ingredients,
+                    'ingredient_quantity' => $l->ingredient_quantity
+                ];
+            }
+            return $new_list;
         } catch (\Exception $ex){
             return ['error' => true,
                     'message' => $ex->getMessage()];
